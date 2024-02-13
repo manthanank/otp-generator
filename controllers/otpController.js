@@ -25,10 +25,10 @@ exports.sendOTP = async (req, res, next) => {
             message: `<p>Your OTP is: <strong>${otp}</strong></p>`,
         });
 
-        res.status(200).json({ message: 'OTP sent successfully' });
+        res.status(200).json({ success: true, message: 'OTP sent successfully' });
     } catch (error) {
         console.error('Error sending OTP:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ success: false, error: 'Internal server error' });
     }
 };
 
@@ -40,13 +40,13 @@ exports.verifyOTP = async (req, res, next) => {
         
         if (existingOTP) {
             // OTP is valid
-            res.status(200).json({ message: 'OTP verification successful' });
+            res.status(200).json({ success: true, message: 'OTP verification successful' });
         } else {
             // OTP is invalid
-            res.status(400).json({ error: 'Invalid OTP' });
+            res.status(400).json({ success: false, error: 'Invalid OTP' });
         }
     } catch (error) {
         console.error('Error verifying OTP:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ success: false, error: 'Internal server error' });
     }
 };

@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = verifyOTPForm.elements.email.value;
             const otp = verifyOTPForm.elements.otp.value;
             const response = await fetch(`/api/verifyOTP?email=${email}&otp=${otp}`);
-            const result = await response.text();
-            alert(result);
+            const result = await response.json();
+            // console.log(result);
+            alert(result.message);
+            if (result.success) {
+                window.location.href = 'success.html';
+            }
         });
     }
 });
